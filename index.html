@@ -199,6 +199,16 @@ button{font-family:inherit}
 #poster button{border:0;border-radius:11px;background:var(--navy);color:#fff;font:600 13.5px Inter,Arial,sans-serif;padding:12px 22px;cursor:pointer}
 #poster button:hover{background:var(--navy2)}
 #poster small{display:block;margin-top:10px;font-size:10.5px;color:#948d83}
+
+/* ===== mobil: iç kaydırma yok, sayfa akışı ===== */
+@media (max-width:720px){
+  html,body{height:auto;min-height:0}
+  #wrap{height:auto;min-height:0;overflow:visible}
+  #c{position:relative;inset:auto;height:300px}
+  #poster{bottom:auto;height:300px}
+  .panel{position:relative;top:auto;bottom:auto;left:auto;right:auto;height:auto;width:auto;border-radius:18px 18px 0 0;overflow:visible;box-shadow:none}
+  .pb{overflow:visible;flex:none}
+}
 </style>
 </head>
 <body>
@@ -1043,7 +1053,7 @@ function frame(resetDir){
   const w=canvas.clientWidth,h=canvas.clientHeight;
   renderer.setSize(w,h,false);
   mobile=w<720; const pn=document.querySelector('.panel');
-  if(mobile){const ph=Math.min(pn.offsetHeight,h*.6);camera.aspect=w/(h+ph);camera.setViewOffset(w,h+ph,0,ph,w,h);}
+  if(mobile){camera.aspect=w/h;camera.clearViewOffset();}
   else{const pw=pn.offsetWidth+16;camera.aspect=(w+pw)/h;camera.setViewOffset(w+pw,h,0,0,w,h);}
   camera.fov=mobile?55:38;
   const hf=Math.atan(Math.tan(camera.fov*Math.PI/360)*camera.aspect);
